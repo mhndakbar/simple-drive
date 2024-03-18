@@ -7,7 +7,7 @@ module Blobs
 
     def call
       decode_data!
-      create_blob!
+      storage_service.store_blob
     rescue StandardError => e
       raise e
     end
@@ -19,11 +19,17 @@ module Blobs
       raise ArgumentError, 'Invalid base64 data' if @decoded_data.blank?
     end
 
-    def create_blob!
-      blob = Blob.create!(id: @blob_params[:id], data: @blob_params[:data])
-      blob.create_blob_metadata!(owner_id: @current_user.id, size: @decoded_data.bytesize)
-    rescue ActiveRecord::RecordNotUnique => e
-      raise ArgumentError, e.message
+    def storage_service
+      case SimpleDrive::STORAGE_SERVICE
+      when SimpleDrive::STORAGE_OPTIONS[:database]
+        DatabaseStorageService.new(@blob_params, @current_user, @decoded_data)
+      when SimpleDrive::STORAGE_OPTIONS[:local_storage]
+        LocalStorageService.new(@blob_params, @current_user, @decoded_data)
+      when SimpleDrive::STORAGE_OPTIONS[:cloud]
+        CloudStorageService.new(@blob_params, @current_user, @decoded_data)
+      else
+        raise ArgumentError, 'Invalid storage service configuration'
+      end
     end
   end
 end
