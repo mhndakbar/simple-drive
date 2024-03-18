@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_16_144510) do
+ActiveRecord::Schema.define(version: 2024_03_18_121103) do
+
+  create_table "blob_metadata", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "blob_id"
+    t.integer "owner_id", null: false
+    t.integer "size"
+    t.index ["blob_id"], name: "index_blob_metadata_on_blob_id"
+  end
 
   create_table "blobs", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "data"
