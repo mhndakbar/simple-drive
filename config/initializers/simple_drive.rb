@@ -5,6 +5,6 @@ module SimpleDrive
     cloud: "cloud"
   }.freeze
 
-  STORAGE_SERVICE = STORAGE_OPTIONS[:local_storage]
+  STORAGE_SERVICE = STORAGE_OPTIONS[:cloud]
   LOCAL_STORAGE_PATH = "/Users/mhnd/Documents"
 end

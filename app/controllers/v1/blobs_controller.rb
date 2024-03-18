@@ -25,21 +25,16 @@ module V1
         return
       end
 
-      blob = Blob.find_by(id: blob_params[:id].to_s)
+      blob_data = Blobs::Retrieve.new(blob_params, @current_user).call
 
-      unless blob
+      unless blob_data
         render(json: { code: 404, message: 'Blob not found' })
         return
       end
 
-      blob_metadata = BlobMetadata.find_by(blob_id: blob.id)
-
-      render(json: {
-        id: blob.id,
-        data: blob.data,
-        size: blob_metadata.size,
-        created_at: blob.created_at.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
-      })
+      render(json: blob_data)
+    rescue => e
+      render(json: { code: 500, message: "An unexpected error occurred: #{e.message}" })
     end
 
     private
