@@ -16,7 +16,7 @@ class CloudStorageService < StorageService
     if response.code == "200"
       create_blob_metadata
     else
-      raise "Failed to upload to OSS: #{response.code} - #{response.message}"
+      raise "Failed to upload to cloud storage: #{response.code} - #{response.message}"
     end
   end
 
@@ -34,7 +34,7 @@ class CloudStorageService < StorageService
         created_at: blob_metadata.created_at.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
       }
     else
-      raise "Failed to retrieve blob from cloud storage: #{response.code} - #{response.message}"
+      raise "Failed to retrieve file from cloud storage: #{response.code} - #{response.message}"
     end
   end
 

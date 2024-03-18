@@ -32,7 +32,8 @@ module V1
     private
 
     def generate_token(user_id)
-      payload = { user_id: user_id, exp: Time.now.to_i + 3600 }
+      random_string = SecureRandom.hex(10)
+      payload = { user_id: user_id, random_string: random_string }
       JWT.encode(payload, Rails.application.secrets.secret_key_base)
     end
 

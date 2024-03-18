@@ -28,7 +28,7 @@ module V1
       blob_data = Blobs::Retrieve.new(blob_params, @current_user).call
 
       unless blob_data
-        render(json: { code: 404, message: 'Blob not found' })
+        render(json: { code: 404, message: 'Data not found' })
         return
       end
 

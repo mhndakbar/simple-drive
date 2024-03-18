@@ -14,7 +14,7 @@ class LocalStorageService < StorageService
 
     BlobMetadata.create!(blob_id: @blob_params[:id], owner_id: @current_user.id, size: @decoded_data.bytesize)
   rescue => e
-    raise "Failed to store blob in local storage: #{e.message}"
+    raise "Failed to store file in local storage: #{e.message}"
   end
 
   def retrieve_blob
@@ -34,6 +34,6 @@ class LocalStorageService < StorageService
       created_at: blob_metadata.created_at.utc.strftime('%Y-%m-%dT%H:%M:%SZ')
     }
   rescue => e
-    raise "Failed to retrieve blob from local storage: #{e.message}"
+    raise "Failed to retrieve file from local storage: #{e.message}"
   end
 end
