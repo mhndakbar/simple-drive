@@ -59,6 +59,7 @@ Optional for testing:
      ```sh
      EDITOR=nano rails credentials:edit --environment development
      ```
+     In my case I choosed Alibaba Cloud OSS, it operates by storing data in buckets, which are logical containers for objects. Users can upload and retrieve objects using HTTP or HTTPS protocols.
      Replace the values with your corresponding service information:
      ```yaml
      alibaba_cloud_oss:
