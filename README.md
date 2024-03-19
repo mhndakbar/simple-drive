@@ -1,4 +1,3 @@
-````markdown
 # Simple Drive
 
 A unified interface for multiple storage backends.
@@ -157,4 +156,3 @@ Optional for testing:
          "created_at": "2024-03-19T08:18:10Z"
        }
        ```
-````
