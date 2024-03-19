@@ -20,10 +20,18 @@ Optional for testing:
 
 ## Installation
 
-1. Install gems:
+1. Install gems, create database and run the migrations:
 
    ```sh
    bundle install
+   ```
+
+   ```sh
+   rails db:create
+   ```
+
+   ```
+   rails db:migrate RAILS_ENV=development
    ```
 
 2. Storage Configuration:
@@ -59,15 +67,17 @@ Optional for testing:
      ```sh
      EDITOR=nano rails credentials:edit --environment development
      ```
-     In my case, I chose Alibaba Cloud OSS, which operates by storing data in buckets, logical containers for objects. Users can upload and retrieve objects using HTTP or HTTPS protocols.
-     Replace the values with your corresponding service information:
-     ```yaml
-     alibaba_cloud_oss:
-       endpoint: BUCKET_ENDPOINT
-       access_key_id: ACCESS_KEY_ID
-       access_key_secret: ACCESS_KEY_SECRET
-       bucket_name: BUCKET_NAME
-     ```
+   - The development key to open credentials: `f0ede6f0ad3001344b4bf06fc6c22988`
+   - In my case, I chose Alibaba Cloud OSS, which operates by storing data in buckets, logical containers for objects. Users can upload and retrieve objects using HTTP or HTTPS protocols.
+   - Replace the values with your corresponding service information:
+
+   ```yaml
+   alibaba_cloud_oss:
+     endpoint: BUCKET_ENDPOINT
+     access_key_id: ACCESS_KEY_ID
+     access_key_secret: ACCESS_KEY_SECRET
+     bucket_name: BUCKET_NAME
+   ```
 
 3. Run the app:
    ```sh
